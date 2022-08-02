@@ -3,6 +3,7 @@ body
 {
     color: #28282d!important;
     min-height: 100vh;
+    font-family: 'Montserrat'!important;
 }
 h2
 {
@@ -34,6 +35,7 @@ h2
 {
     background-color: #ed647e!important;
     border-color: #ed647e!important;
+    border-radius: 0px!important;
 }
 .form-check-input:focus
 {
@@ -53,22 +55,25 @@ h2
 }
 .btn-redi
 {
-    background-color: #ed647e;
-    height: 30px;
-    width: 150px;
+    background-color: #28282d;
+    border: 2px solid #28282d;
+    height: 42px;
+    width: 253px;
     display: grid;
     align-items: center;
     justify-content: center;
-    border-radius: 5px;
 }
 .lien-redi
 {
     color: #FFFFFF;
     text-decoration: none;
 }
-.lien-redi:hover
+.btn-redi:hover .lien-redi
 {
-    color: #FFFFFF!important;
+    color: #28282d!important;
+}
+.btn-redi:hover {
+    background-color: #FFFFFF;
 }
 
 /* FORM */
@@ -79,6 +84,11 @@ h2
 label 
 {
     display: inline!important;
+}
+
+/* PAGE TRAITMENT */
+.text-traitment {
+    font-size: 20px;
 }
 
 /* MEDIA QUERIES MOBILE */
