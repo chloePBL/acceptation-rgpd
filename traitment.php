@@ -75,6 +75,8 @@ if (isset($_POST['code_customer'])) {
         $oCustomer->isOptIn_sms = 0;
         $oCustomer->isOptIn_email = 0;
     }
+}else {
+    $errorlog->addToLog(2, "[RECUP-DONNEES]-Aucune donnée transmise");
 }
 
 // Instanciation de la class TranslationToJson avec l'objet oTranslationToJson qui prend en paramètre l'objet oCustomer
@@ -100,9 +102,11 @@ if ($oTranslationToJson->execute() == true) {
         echo '<p class="text-traitment"><strong>À bientôt !</strong></p>';
     } else {
         echo '<p class="msg-erreur">' . $oCallWS->getError() . '</p>';
+        $errorlog->addToLog(2, "[APPEL-WS]-" . $oCallWS->getError());
     }
 } else {
     echo '<p class="msg-erreur">' . $oTranslationToJson->getError() . '</p>';
+    $errorlog->addToLog(2, "[TRANSLATE-JSON]-" . $oTranslationToJson->getError());
 }
 btnRedir();
 include("view/view.footer.php");
