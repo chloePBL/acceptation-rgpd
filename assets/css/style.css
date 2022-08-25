@@ -1,13 +1,15 @@
 /* LAYOUT GENERAL */
 body
 {
-    color: #28282d!important;
+    color: #0d2a3a!important;
     min-height: 100vh;
     font-family: 'Montserrat'!important;
 }
 h2
 {
     margin-bottom: 1rem!important;
+    color: #ed647e;
+    font-weight: 600!important;
 }
 .align-center
 {
@@ -28,6 +30,9 @@ h2
 .img-logo
 {
     max-width: 80%;
+}
+.BGrose {
+    background-color: #f9dad8;
 }
 
 /* COLOR */
@@ -55,8 +60,8 @@ h2
 }
 .btn-redi
 {
-    background-color: #28282d;
-    border: 2px solid #28282d;
+    background-color: #0d2a3a;
+    border: 2px solid #0d2a3a;
     height: 42px;
     width: 253px;
     display: grid;
@@ -70,7 +75,7 @@ h2
 }
 .btn-redi:hover .lien-redi
 {
-    color: #28282d!important;
+    color: #0d2a3a!important;
 }
 .btn-redi:hover {
     background-color: #FFFFFF;
@@ -85,6 +90,21 @@ label
 {
     display: inline!important;
 }
+.msgError {
+    border: solid 2px #ed647e;
+    background-color: #ed647e29;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ed647e;
+    width: 30%;
+}
+.msgError p {
+    margin: 0px;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+}
 
 /* PAGE TRAITMENT */
 .text-traitment {
@@ -94,9 +114,11 @@ label
 /* MEDIA QUERIES MOBILE */
 @media screen and (max-width: 991.98px)
 {
-    .h-20
+    .visuelBL
     {
-        height: 20%!important;
+        width: 70%!important;
+        padding-top: 1rem;
+        padding-bottom: 2rem;
     }
     .h-80
     {
@@ -105,6 +127,15 @@ label
     .start-center
     {
         align-content: flex-start!important;
-        padding-top: 5rem;
+        padding-top: 2rem;
+    }
+    .msgError {
+        width: 100%;
+    }
+    .descriptionRGPD {
+        text-align: justify;
+    }
+    h5 {
+        font-size: 1.18rem!important;
     }
 }

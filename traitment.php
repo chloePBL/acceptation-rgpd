@@ -1,4 +1,12 @@
 <?php
+// UTILITIES
+require_once("../utilities/class.format-date.php");
+require_once("../utilities/ut.date.php");
+// Log
+require_once "../utilities/interfaces/int.logger.php";
+require_once("../utilities/ut.logFile.php");
+$errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
+$infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
 // Inclusion des interfaces
 include("interfaces/Int.callWS.php");
 include("interfaces/Int.customerToJson.php");
@@ -24,34 +32,44 @@ date_default_timezone_set("Europe/Paris");
 //Instanciation de la Class Customer avec l'objet customer
 $oCustomer = new ClCustomer();
 if (isset($_POST['code_customer'])) {
+    $infolog->addToLog(1, "[RECUP-DONNEES]-code client récupéré");
     $oCustomer->intCode_customer = $_POST['code_customer'];
     $oCustomer->sDateAccepted = date('Y-m-d H:i:s', time());
     if (!isset($_POST['opt_in_none'])) {
         //Verif si l'Opt-in Téléphone est coché
         if (isset($_POST['phone'])) {
+            $infolog->addToLog(1, "[OPTIN-PHONE]-coché");
             $oCustomer->isOptIn_phone = 1; 
         } else {
+            $infolog->addToLog(1, "[OPTIN-PHONE]-pas coché");
             $oCustomer->isOptIn_phone = 0;
         }
         //Verif si l'Opt-in SMS est coché
         if (isset($_POST['sms'])) {
+            $infolog->addToLog(1, "[OPTIN-SMS]-coché");
             $oCustomer->isOptIn_sms = 1;
         } else {
+            $infolog->addToLog(1, "[OPTIN-SMS]-pas coché");
             $oCustomer->isOptIn_sms = 0;
         }
         //Verif si l'Opt-in email est coché
         if (isset($_POST['email'])) {
+            $infolog->addToLog(1, "[OPTIN-EMAIL]-coché");
             $oCustomer->isOptIn_email= 1;
         } else {
+            $infolog->addToLog(1, "[OPTIN-EMAIL]-pas coché");
             $oCustomer->isOptIn_email = 0;
         }
         //Verif si l'Opt-in mail est coché
         if (isset($_POST['mail'])) {
+            $infolog->addToLog(1, "[OPTIN-MAIL]-coché");
             $oCustomer->isOptIn_mail = 1;
         } else {
+            $infolog->addToLog(1, "[OPTIN-MAIL]-pas coché");
             $oCustomer->isOptIn_mail = 0;
         }
     } else {
+        $infolog->addToLog(1, "[OPTIN-NONE]-coché");
         $oCustomer->isOptIn_phone = 0;
         $oCustomer->isOptIn_mail = 0;
         $oCustomer->isOptIn_sms = 0;
@@ -63,6 +81,7 @@ if (isset($_POST['code_customer'])) {
 $oTranslationToJson = new ClCustomerToJson($oCustomer);
 //Vérif si le fichier json a bien été implémenter avec les nouvelles infos de l'objet Customer sinon on affiche le message d'erreur
 if ($oTranslationToJson->execute() == true) {
+    $infolog->addToLog(1, "[TRANSLATE-JSON]-OK");
     //Déclaration des variables pour l'appel au WS
     // $url = 'https://bleulibellule.clic-till.com/wsRest/1_4/wsServerCustomer/SetCustomer';
     // $token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
@@ -75,6 +94,7 @@ if ($oTranslationToJson->execute() == true) {
     $bRetour = $oCallWS->execute($sValue);
     //Vérif si l'appel du WS SetCustomer c'est bien passé sinon affichage du message d'erreur
     if ($bRetour == true) {
+        $infolog->addToLog(1, "[APPEL-WS]-OK");
         echo '<p class="text-traitment"><strong>Merci, nous avons bien pris en compte vos préférences de communication.</strong>';
         echo '<br><p>Si vous souhaitez modifier vos préférences de communication, rendez-vous dans votre espace MON COMPTE sur l’e-shop ou l’application.</p>';
         echo '<p class="text-traitment"><strong>À bientôt !</strong></p>';

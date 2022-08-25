@@ -15,7 +15,8 @@
 <body>
 <div class="container-fluid d-flex min-vh-100">
     <div class="row min-vh-100 ">
-        <div class="col-lg-4 shadow align-center justify-center h-20">
-            <img src="assets/img/logo.png" alt="Logo Bleu Libellule" class="img-logo">
+        <div class="col-lg-4 shadow align-center justify-center p-0 BGrose">
+            <!-- <img src="assets/img/logo.png" alt="Logo Bleu Libellule" class="img-logo"> -->
+            <img src="assets/img/visuelcrm.jpg" alt="Bleu Libellule" class="visuelBL" width="100%">
         </div>
-        <div class="col-lg-8 align-center px-md-5 px-4 h-80 start-center">
+        <div class="col-lg-8 align-center px-md-5 px-4 pb-4 start-center">

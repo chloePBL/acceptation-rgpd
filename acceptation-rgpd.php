@@ -31,22 +31,31 @@ function btnRedir(){
 
 <div class="row marg-bot">
     <h2>Gérez vos préférences de communication Bleu Libellule</h2>
-    <p>Ne manquez plus les actualités Bleu Libellule ! Recevez en avant-première les nouveautés, vos offres exceptionnelles & personnalisées tous les mois, vos offres exclusives fidélité Team Lib’, des sélections tendance personnalisées et des conseils beauté.</p>
+    <p class="descriptionRGPD">Ne manquez plus les actualités Bleu Libellule ! Recevez en avant-première les nouveautés, vos offres exceptionnelles & personnalisées tous les mois, vos offres exclusives fidélité Team Lib’, des sélections tendance personnalisées et des conseils beauté.</p>
 </div>
 
 <?php
 // Vérif si les valeurs sont bien passé dans l'url avec la fonction isset
 // Déclaration des deux constantes KEY1 et KEY2 qui récupère les infos de la globale $_GET sinon la constante est vide
 if (isset($_GET['code'])) { 
-    define('KEY1', $_GET['code']);} 
+    define('KEY1', $_GET['code']);
+    $infolog->addToLog(1, "[KEY1]-OK");
+} 
 else { 
-    define('KEY1', ''); }
+    define('KEY1', '');
+    $errorlog->addToLog(2, "[KEY1]-Pas de clé transmise");
+}
 if (isset($_GET['email'])) { 
-    define('KEY2', $_GET['email']);} 
+    define('KEY2', $_GET['email']);
+    $infolog->addToLog(1, "[KEY2]-OK");
+} 
 else { 
-    define('KEY2', ''); }
+    define('KEY2', '');
+    $errorlog->addToLog(2, "[KEY2]-Pas de clé transmise.");
+}
 //Vérification si les constantes ne sont pas vides avec la fonction empty
 if (!empty(KEY1) & !empty(KEY2)){
+    $infolog->addToLog(1, "[APPEL-WS-GET]-OK");
     //Déclaration des variables pour l'appel au WS
     //$url = 'https://bleulibellule.clic-till.com/wsRest/1_5/wsServerCustomer/GetCustomer';
     //$token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
@@ -81,11 +90,11 @@ if (!empty(KEY1) & !empty(KEY2)){
             //Vérification de l'email et du code client envoyé par splio est le même que celui dans le fichier json sinon exit()
             if (KEY2 === $oCustomer->sEmail && KEY1 === $oCustomer->intCode_customer){
                 // Ajout log
-                $infolog->addToLog(1, "[CORRESPONDANCE-DONNEES]-Le client a été trouvé.");
+                $infolog->addToLog(1, "[CORRESPONDANCE-DONNEES]-client trouvé.");
                 //Affichage du formulaire pré-rempli en fonction des choix du client
                 include("view/view.form.php");
             } else {
-                $errorlog->addToLog(2, "[CORRESPONDANCE-DONNEES]-le client n'a pas été trouvé.");
+                $errorlog->addToLog(2, "[CORRESPONDANCE-DONNEES]-client introuvable.");
                 echo "<p>Compte inexistant.</p>";
                 btnRedir();
             }

@@ -1,6 +1,6 @@
 <div class="row">
-    <h5>Vous souhaitez recevoir ces communications :</h5>
-    <form action="traitment.php" method="POST">
+    <h5>Validez ou modifiez vos préférences de communications communiqués à nos équipes. <br>Vous souhaitez recevoir ces communications :</h5>
+    <form action="traitment.php" method="POST" class="form">
         <?php
             echo '<input type="hidden" name="code_customer" value="' . $oCustomer->intCode_customer . '">';
 
@@ -53,8 +53,9 @@
                 echo '<label for="opt_in_none" class="form-check-label rouge">Je ne souhaite pas recevoir de communications Bleu Libellule</label>';
                 ?>
             </div>
+            <div class="msgError"></div>
         </br>
-        <input type="submit" class="btn btn-primary rose-btn shadow-sm" value="VALIDER MES PRÉFÉRENCES">
+        <input type="submit" class="btn btn-primary rose-btn shadow-sm inputValided" value="VALIDER MES PRÉFÉRENCES">
     </form>
 </div>
 <div class="row">
