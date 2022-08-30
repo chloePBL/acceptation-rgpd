@@ -38,10 +38,10 @@ function btnRedir(){
 // Vérif si les valeurs sont bien passé dans l'url avec la fonction isset
 // Déclaration des deux constantes KEY1 et KEY2 qui récupère les infos de la globale $_GET sinon la constante est vide
 if (isset($_GET['code'])) { 
-    /* $code = $_GET['code'];
+    $code = $_GET['code'];
     $code = substr($code,2); // supprimer CT devant le code 
-    define('KEY1', $code); */
-    define('KEY1', $_GET['code']);
+    define('KEY1', $code);
+    /* define('KEY1', $_GET['code']); */
     $infolog->addToLog(1, "[KEY1]-OK");
 } 
 else { 
@@ -91,8 +91,13 @@ if (!empty(KEY1) & !empty(KEY2)){
         if($oTranslationJson->execute() == true){
             $infolog->addToLog(1, "[TRANSLATION-JSON]-OK");
             //Vérification de l'email et du code client envoyé par splio est le même que celui dans le fichier json sinon exit()
-            if (KEY2 === $oCustomer->sEmail && KEY1 === $oCustomer->intCode_customer){
-            /* if (password_verify($oCustomer->sEmail, KEY2) == true  && KEY1 === $oCustomer->intCode_customer){ */
+            /* if (KEY2 === $oCustomer->sEmail && KEY1 === $oCustomer->intCode_customer){ */
+                /* var_dump(md5($oCustomer->sEmail));
+                var_dump(KEY2);
+                var_dump(md5($oCustomer->sEmail) == KEY2); */
+            if ((md5($oCustomer->sEmail) ==  KEY2)  && KEY1 === $oCustomer->intCode_customer){
+            /* $passwordSha = hash('sha256', $oCustomer->sEmail);
+            if (password_verify($passwordSha, KEY2)  && KEY1 === $oCustomer->intCode_customer){ */
                 // Ajout log
                 $infolog->addToLog(1, "[CORRESPONDANCE-DONNEES]-client trouvé.");
                 //Affichage du formulaire pré-rempli en fonction des choix du client

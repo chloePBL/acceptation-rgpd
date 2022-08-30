@@ -1,5 +1,5 @@
 <div class="row">
-    <h5>Validez ou modifiez vos préférences de communications communiqués à nos équipes. <br>Vous souhaitez recevoir ces communications :</h5>
+    <h5>Validez ou modifiez vos préférences de communications communiquées à nos équipes. <br>Vous souhaitez recevoir ces communications :</h5>
     <form action="traitment.php" method="POST" class="form">
         <?php
             echo '<input type="hidden" name="code_customer" value="' . $oCustomer->intCode_customer . '">';
