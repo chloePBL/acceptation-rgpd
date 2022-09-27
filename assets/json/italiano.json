@@ -1,0 +1,22 @@
+{
+    "home": {
+        "1": "Gestite le vostre preferenze di comunicazione con Bleu Libellule",
+        "2": "Non perdetevi altre notizie su Bleu Libellule! Ricevere ogni mese anteprime di nuovi prodotti, offerte eccezionali e personalizzate, offerte esclusive di fidelizzazione del Team Lib, selezioni di tendenze personalizzate e consigli di bellezza.",
+        "3": "Convalidare o modificare le preferenze di comunicazione comunicate ai nostri team. <br>Desiderate ricevere queste comunicazioni:",
+        "4": "Per sms",
+        "5": "Per e-mail",
+        "6": "Per posta",
+        "7": "Non desidero ricevere le comunicazioni di Bleu Libellule",
+        "8": "CONVALIDARE LE MIE PREFERENZE"
+    },
+    "traitment" : {
+        "50": "Grazie, abbiamo tenuto conto delle vostre preferenze di comunicazione.",
+        "51": "Se desiderate modificare le vostre preferenze di comunicazione, accedete all'area IL MIO ACCOUNT sull'e-shop o sull'app.",
+        "52": "A presto!"
+    },
+    "error": {
+        "100": "Vi preghiamo di fare una scelta.",
+        "101": "Siamo spiacenti, ma si è verificato un errore. Non è stato possibile completare la modifica.",
+        "102": "Nessun conto."
+    }
+}

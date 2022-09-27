@@ -15,17 +15,77 @@ include("interfaces/Int.customerToJson.php");
 include("class/class.customer.php");
 include("class/class.customerToJson.php");
 include("class/class.callWS.php");
+include("class/class.traduction.php");
 include("view/view.header.php");
 // Bouton de redirection sur le site BL
-function btnRedir(){
-    echo '<div class="btn-redi shadow-sm">
-            <a href="https://www.bleulibellule.com/" class="lien-redi">
-                Aller sur Bleu Libellule 
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
-                </svg>
-            </a>
-        </div>';
+function btnRedir($lang){
+    switch($lang){
+        case "FR":
+            echo '<div class="btn-redi shadow-sm">
+                    <a href="https://www.bleulibellule.com/" class="lien-redi">
+                        Aller sur Bleu Libellule 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </div>';
+            break;
+        case "IT":
+            echo '<div class="btn-redi shadow-sm">
+                    <a href="https://www.bleulibellule.it/" class="lien-redi">
+                        Vai a Bleu Libellule 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </div>';
+            break;
+        case "EN":
+            echo '<div class="btn-redi shadow-sm">
+                    <a href="https://www.bleulibellule.com/" class="lien-redi">
+                        Go to Bleu Libellule 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </div>';
+            break;
+        default:
+            echo '<div class="btn-redi shadow-sm">
+                    <a href="https://www.bleulibellule.com/" class="lien-redi">
+                        Go to Bleu Libellule 
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+                        </svg>
+                    </a>
+                </div>';
+            break;
+    }
+}
+if(isset($_POST['lang'])){
+    define("LANG", $_POST['lang']);
+    $oTrad = new traduction($_POST['lang']);
+}else{
+    define("LANG", "EN");
+    $oTrad = new traduction("EN");
+}
+function changeLang($lang){
+    switch($lang){
+        case "FR":
+            echo '<form>'
+            
+            . '</form>';
+            break;
+        case "IT":
+            echo '';
+            break;
+        case "EN":
+            echo '';
+            break;
+        default:
+            echo '';
+            break;
+    }
 }
 // Définition du fuseau horaire souhaité
 date_default_timezone_set("Europe/Paris");
@@ -88,7 +148,7 @@ if ($oTranslationToJson->execute() == true) {
     // $url = 'https://bleulibellule.clic-till.com/wsRest/1_4/wsServerCustomer/SetCustomer';
     // $token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
     $url = 'https://testbl.retailandco.org/wsRest/1_5/wsServerCustomer/SetCustomer';
-    $token = 'Token: 645443ebCsm2lomJqWlmlqZ2aU';
+    $token = 'Token: 645443ebCsm2lomJqWlmlqZ2';
     $method = 'POST';
     $sValue = $oTranslationToJson->getJson();
     // Appel au web service 
@@ -97,17 +157,17 @@ if ($oTranslationToJson->execute() == true) {
     //Vérif si l'appel du WS SetCustomer c'est bien passé sinon affichage du message d'erreur
     if ($bRetour == true) {
         $infolog->addToLog(1, "[APPEL-WS]-OK");
-        echo '<p class="text-traitment"><strong>Merci, nous avons bien pris en compte vos préférences de communication.</strong>';
-        echo '<br><p>Si vous souhaitez modifier vos préférences de communication, rendez-vous dans votre espace MON COMPTE sur l’e-shop ou l’application.</p>';
-        echo '<p class="text-traitment"><strong>À bientôt !</strong></p>';
+        echo '<p class="text-traitment"><strong>' . $oTrad->trad("traitment", "50")   . '</strong>';
+        echo '<br><p>' . $oTrad->trad("traitment", "51")   . '</p>';
+        echo '<p class="text-traitment"><strong>' . $oTrad->trad("traitment", "52")   . '</strong></p>';
     } else {
-        echo '<p class="msg-erreur">' . $oCallWS->getError() . '</p>';
+        echo '<p class="msg-erreur">' . $oTrad->trad("error", "102")   . '</p>';
         $errorlog->addToLog(2, "[APPEL-WS]-" . $oCallWS->getError());
     }
 } else {
-    echo '<p class="msg-erreur">' . $oTranslationToJson->getError() . '</p>';
+    echo '<p class="msg-erreur">' . $oTrad->trad("error", "102")   . '</p>';
     $errorlog->addToLog(2, "[TRANSLATE-JSON]-" . $oTranslationToJson->getError());
 }
-btnRedir();
+btnRedir(LANG);
 include("view/view.footer.php");
 

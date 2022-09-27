@@ -1,8 +1,9 @@
 <div class="row">
-    <h5>Validez ou modifiez vos préférences de communications communiquées à nos équipes. <br>Vous souhaitez recevoir ces communications :</h5>
+    <h5><?php $oTrad->trad("home", "3"); ?></h5>
     <form action="traitment.php" method="POST" class="form">
         <?php
             echo '<input type="hidden" name="code_customer" value="' . $oCustomer->intCode_customer . '">';
+            echo '<input type="hidden" name="lang" value="' . LANG . '">';
 
             
             
@@ -12,7 +13,7 @@
             } else {
                 echo '<input type="checkbox" name="sms" id="sms" class="form-check-input checkboxes">';
             }
-            echo '<label for="sms" class="form-check-label rouge">Par sms</label>';
+            echo '<label for="sms" class="form-check-label rouge">' . $oTrad->trad("home", "4") . '</label>';
             echo '</div>';
             
 
@@ -22,7 +23,7 @@
             } else {
                 echo '<input type="checkbox" name="email" id="email" class="form-check-input checkboxes">';
                 }
-                echo '<label for="email" class="form-check-label rouge">Par email</label>';
+                echo '<label for="email" class="form-check-label rouge">' . $oTrad->trad("home", "5") . '</label>';
             echo '</div>';
                 
                 
@@ -32,7 +33,7 @@
             } else {
                 echo '<input type="checkbox" name="mail" id="mail" class="form-check-input checkboxes">';
             }
-                echo '<label for="mail" class="form-check-label rouge">Par courrier postal</label>';
+                echo '<label for="mail" class="form-check-label rouge">' . $oTrad->trad("home", "6") . '</label>';
             echo '</div>';
             
             /* echo '<div class="form-checkbox pb-2">';
@@ -50,13 +51,13 @@
             } else {
                 echo '<input type="checkbox" name="opt_in_none" id="opt_in_none" class="form-check-input" >';
             }
-                echo '<label for="opt_in_none" class="form-check-label rouge">Je ne souhaite pas recevoir de communications Bleu Libellule</label>';
-                ?>
-            </div>
-            <div class="msgError"></div>
-        </br>
-        <input type="submit" class="btn btn-primary rose-btn shadow-sm inputValided" value="VALIDER MES PRÉFÉRENCES">
-    </form>
-</div>
-<div class="row">
+                echo '<label for="opt_in_none" class="form-check-label rouge">' . $oTrad->trad("home", "7") . '</label>';
+            echo '</div>';
+            echo '<div class="msgError"></div>';
+        echo '</br>';
+        echo '<input type="submit" class="btn btn-primary rose-btn shadow-sm inputValided" value="' . $oTrad->trad("home", "8") . '">';
+    echo '</form>';
+echo '</div>';
+echo '<div class="row">'
+?>
 

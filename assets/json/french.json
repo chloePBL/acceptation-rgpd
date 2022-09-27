@@ -1,0 +1,23 @@
+{
+    "home": {
+        "1": "Gérez vos préférences de communication Bleu Libellule",
+        "2": "Ne manquez plus les actualités Bleu Libellule ! Recevez en avant-première les nouveautés, vos offres exceptionnelles & personnalisées tous les mois, vos offres exclusives fidélité Team Lib’, des sélections tendance personnalisées et des conseils beauté.",
+        "3": "Validez ou modifiez vos préférences de communications communiquées à nos équipes. <br>Vous souhaitez recevoir ces communications :",
+        "4": "Par sms",
+        "5": "Par email",
+        "6": "Par courrier postal",
+        "7": "Je ne souhaite pas recevoir de communications Bleu Libellule",
+        "8": "VALIDER MES PRÉFÉRENCES"
+    },
+    "traitment" : {
+        "50": "Merci, nous avons bien pris en compte vos préférences de communication.",
+        "51": "Si vous souhaitez modifier vos préférences de communication, rendez-vous dans votre espace MON COMPTE sur l’e-shop ou l’application.",
+        "52": "À bientôt !"
+    },
+    "error": {
+        "100": "Veuillez faire un choix.",
+        "101": "Veuillez nous excuser, une erreur est survenue.",
+        "102": "Veuillez nous excuser, une erreur est survenue. La modification n’a pas pu aboutir.",
+        "103": "Compte inexistant."
+    }
+}

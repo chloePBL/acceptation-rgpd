@@ -51,6 +51,16 @@ h2
 {
     background-color: #f8f8f8;
 }
+/* FORMULAIRE LANGUES */
+.formLang {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+}
+.imgLang {
+    width: 30px;
+    padding-right: 5px;
+}
 
 /* BOUTON */
 .btn:hover, .btn-redi:hover

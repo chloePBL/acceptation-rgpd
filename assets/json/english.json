@@ -1,0 +1,23 @@
+{
+    "home": {
+        "1": "Manage your communication preferences with Bleu Libellule",
+        "2": "Do not miss Bleu Libellule news! Receive a preview of our new products,  exceptional & personalized offers every month, exclusive Team Lib' loyalty offers, personalized trendy selections and beauty advice.",
+        "3": "Confirm or modify your communication preferences to our teams. <br>You wish to receveice these communications :",
+        "4": "By SMS",
+        "5": "By email",
+        "6": "By mail",
+        "7": "I do not wish to receive any Bleu Libellule communication",
+        "8": "CONFIRM MY PREFERENCES"
+    },
+    "traitment" : {
+        "50": "Thanks a lot. Your communication preferences have been taken into account.",
+        "51": "If you wish to update your communication preferences, go to MY ACCOUNT onto our e-shop web site or mobile application.",
+        "52": "See you soon !"
+    },
+    "error": {
+        "100": "Please make a choice.",
+        "101": "An error has risen. We apologise for the inconvenience.",
+        "102": "Unable to record the changes. We apologise for the inconvenience.",
+        "103": "User account not found."
+    }
+}
