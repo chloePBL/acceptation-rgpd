@@ -57,9 +57,12 @@ h2
     top: 30px;
     right: 30px;
 }
+.btnLang {
+    border: none;
+    background-color: transparent;
+}
 .imgLang {
     width: 30px;
-    padding-right: 5px;
 }
 
 /* BOUTON */

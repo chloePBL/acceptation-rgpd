@@ -95,13 +95,13 @@ else {
     define('KEY2', '');
     $errorlog->addToLog(2, "[KEY2]-Pas de clé transmise.");
 }
-/* echo '<form method="get" class="formLang">'
-    . 'input type="hidden" name="code" value="' . KEY1 . '">'
-    . 'input type="hidden" name="email" value="' . KEY2 . '">'
-    . '<input type="image" name="lang" value="FR" class="imgLang" alt="Langue French" src="./assets/img/la-france.png">'
-    . '<input type="image" name="lang" value="IT" class="imgLang" alt="Langue French" src="./assets/img/italie.png">'
-    . '<input type="image" name="lang" value="EN" class="imgLang" alt="Langue French" src="./assets/img/royaume-uni.png">'
-.'</form>'; */
+echo '<form action="acceptation-rgpd.php" method="get" class="formLang">'
+    . '<input type="hidden" name="code" value="' . KEY1 . '">'
+    . '<input type="hidden" name="email" value="' . KEY2 . '">'
+    . '<button type="submit" name="lang" value="FR" class="btnLang"><img src="./assets/img/la-france.png" class="imgLang" alt="Langue French"></button>'
+    . '<button type="submit" name="lang" value="IT" class="btnLang"><img src="./assets/img/italie.png" class="imgLang" alt="Langue Italiano"></button>'
+    . '<button type="submit" name="lang" value="EN" class="btnLang"><img src="./assets/img/royaume-uni.png" class="imgLang" alt="Langue English"></button>'
+.'</form>';
 //Vérification si les constantes ne sont pas vides avec la fonction empty
 if (!empty(KEY1) & !empty(KEY2)){
     $infolog->addToLog(1, "[APPEL-WS-GET]-OK");

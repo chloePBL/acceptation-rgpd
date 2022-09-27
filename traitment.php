@@ -69,24 +69,6 @@ if(isset($_POST['lang'])){
     define("LANG", "EN");
     $oTrad = new traduction("EN");
 }
-function changeLang($lang){
-    switch($lang){
-        case "FR":
-            echo '<form>'
-            
-            . '</form>';
-            break;
-        case "IT":
-            echo '';
-            break;
-        case "EN":
-            echo '';
-            break;
-        default:
-            echo '';
-            break;
-    }
-}
 // Définition du fuseau horaire souhaité
 date_default_timezone_set("Europe/Paris");
 //Instanciation de la Class Customer avec l'objet customer
@@ -95,6 +77,7 @@ if (isset($_POST['code_customer'])) {
     $infolog->addToLog(1, "[RECUP-DONNEES]-code client récupéré");
     $oCustomer->intCode_customer = $_POST['code_customer'];
     $oCustomer->sDateAccepted = date('Y-m-d H:i:s', time());
+    var_dump($oCustomer->intCode_customer);
     if (!isset($_POST['opt_in_none'])) {
         //Verif si l'Opt-in Téléphone est coché
         if (isset($_POST['phone'])) {
@@ -148,7 +131,7 @@ if ($oTranslationToJson->execute() == true) {
     // $url = 'https://bleulibellule.clic-till.com/wsRest/1_4/wsServerCustomer/SetCustomer';
     // $token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
     $url = 'https://testbl.retailandco.org/wsRest/1_5/wsServerCustomer/SetCustomer';
-    $token = 'Token: 645443ebCsm2lomJqWlmlqZ2';
+    $token = 'Token: 645443ebCsm2lomJqWlmlqZ2aU';
     $method = 'POST';
     $sValue = $oTranslationToJson->getJson();
     // Appel au web service 

@@ -33,20 +33,4 @@ $(document).ready(function(){
       var checked = $("input:checkbox:checked");//pareil mais avec toutes les checkbox de la page
       return checked.length;
    }
-
-   var chemin = window.location.href; 
-   console.log(chemin);
-   function getParameter(p){
-      var url = window.location.search.substring(1);
-      var varUrl = url.split('&');
-      for (var i = 0; i < varUrl.length; i++)
-      {
-         var parameter = varUrl[i].split('=');
-         if (parameter[0] == p)
-         {
-               return parameter[1];
-         }
-      }
-   }
-   console.log(getParameter("code"));
 });
