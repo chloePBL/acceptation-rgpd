@@ -1,5 +1,5 @@
 <?php
-require 'class/autoloader.php';
+require 'class/Autoloader.php';
 Autoloader::register();
 // UTILITIES
 require_once("../utilities/class.format-date.php");
@@ -10,8 +10,8 @@ require_once("../utilities/ut.logFile.php");
 $errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
 $infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
 // Inclusion des interfaces
-include("interfaces/CallWS.php");
-include("interfaces/CustomerFromJson.php");
+/* include("interfaces/CallWS.php");
+include("interfaces/CustomerFromJson.php"); */
 
 include("view/view.header.php");
 // Affichage contenu en fonction de la lang passé en paramètre dans l'url

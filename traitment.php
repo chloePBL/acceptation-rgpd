@@ -1,5 +1,5 @@
 <?php
-require 'class/autoloader.php';
+require 'class/Autoloader.php';
 Autoloader::register();
 // UTILITIES
 require_once("../utilities/class.format-date.php");
