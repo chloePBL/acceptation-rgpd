@@ -18,7 +18,9 @@ class Autoloader {
      * @param [STRING] $class_name
      * @return void
      */
-    static function autoloadClass($class_name){
-        require 'class/' . $class_name . ".php";
+    static function autoloadClass($class){
+        if(file_exists(__DIR__ . '/' . $class . '.php')){
+            require __DIR__ . '/' . $class . '.php'; 
+        }
     }
 }
