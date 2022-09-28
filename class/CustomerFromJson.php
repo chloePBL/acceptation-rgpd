@@ -1,22 +1,31 @@
 <?php
 /**
- * Class CLCustomerFromJson
+ * Class CustomerFromJson
  * permet de décoder le fichier JSON et d'implémenter les infos recueillis dans l'objet Customer
  */
-class ClCustomerFromJson implements ICustomerFromJson
+class CustomerFromJson implements ICustomerFromJson
 {
     // Déclaration des propriétés
     private $sMsg; // STRING - message d'erreur
     private $sDataJson; // STRING - fichier JSON
     private $oCustomer; // OBJET - objet customer
 
-    // Déclaration du constructeur
+    /**
+     * __construct function
+     *
+     * @param [STRING] $sDataJson
+     * @param [OBJECT] $oCustomer
+     */
     public function __construct($sDataJson, $oCustomer)
     {
         $this->sDataJson = $sDataJson;
         $this->oCustomer = $oCustomer;
     }
-    // implémantation des infos clients dans l'objet customer via la méthode assignation
+    /**
+     * assignation function
+     *
+     * implémantation des infos clients dans l'objet customer via la méthode assignation
+     */
     private function assignation()
     {
         // Initialisation
@@ -38,21 +47,27 @@ class ClCustomerFromJson implements ICustomerFromJson
         }
         return $bRet;
     }
-    // Affichage message d'erreur
+    /**
+     * getError function
+     *
+     * @return [STRING] message d'erreur
+     */
     public function getError()
     {
         return $this->sMsg;
     }
-    // execution du programme
+    /**
+     * execute function
+     *
+     * @return [BOOLEAN] $bRet
+     */
     public function execute()
     {
         $bRet = false;
         $assignationRet = $this->assignation();
         if ($assignationRet == true) {
             $bRet = true;
-            return $bRet;
-        } else {
-            return $bRet;
         }
+        return $bRet;
     }
 }

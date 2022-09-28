@@ -1,9 +1,9 @@
 <?php
 /**
- * class ClCustomer
+ * class Customer
  * Permet de créer un client avec les attributs initier
  */
-class ClCustomer
+class Customer
 {
     // déclaration des propriétés de la class
     public $intCode_customer; // INT - contient le code Clic Till du client
@@ -14,7 +14,6 @@ class ClCustomer
     public $sEmail; // STRING - prend comme valeur l'adresse email du client dans une chaine de caractère
     public $sDateAccepted; // STRING - prend comme valeur la date de l'acceptation des RGPD
 
-    // Déclaration du constructeur
     public function __construct()
     {
         $this->intCode_customer = 0;
@@ -25,20 +24,4 @@ class ClCustomer
         $this->sDateAccepted = "0000-00-00 00:00:00";
         $this->sEmail = "";
     }
-    // public function getCustomer()
-    // {
-    //     return array(
-    //         "code_customer" => $this->intCode_customer, 
-    //         "optIn_phone" => $this->isOptIn_phone,
-    //         "optIn_sms" => $this->isOptIn_sms,
-    //         "optIn_email" => $this->isOptIn_email, 
-    //         "code_customer" => $this->isOptIn_mail,
-    //         "email" => $this->sEmail,
-    //         "dateAccepted" => $this->sDateAccepted
-    //     );
-    // }
-    // public function setCustomer($index, $value)
-    // {
-    //     $this->index = $value;
-    // }
 }

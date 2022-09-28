@@ -1,9 +1,9 @@
 <?php
 /* 
-* Class ClCallWS
+* Class CallWS
 * permet d'appeler un web service
  */
-class ClCallWS implements ICallWS
+class CallWS implements ICallWS
 {
     // déclaration des propriétés
     private $sUrl; // STRING - prend comme valeur l'url de la ressource
@@ -21,10 +21,21 @@ class ClCallWS implements ICallWS
         $this->sToken = $sToken;
         $this->sMethod = $sMethod;
     }
+    /**
+     * __clone function
+     *
+     * @return void
+     */
     private function __clone()
     {
 		$this->sJson = clone $this->sJson;
 	}
+    /**
+     * callWS function
+     *
+     * @param [STRING] $sJsonExec
+     * @return [BOOLEAN] $bReturn
+     */
     private function callWS($sJsonExec)
     {
         // Initialisation
@@ -47,7 +58,6 @@ class ClCallWS implements ICallWS
             if (curl_errno($curl)) {
                 $bReturn = false;
                 $this->sMsg = curl_error($curl);
-                return array($bReturn);
             }
             else {
                 // page pas OK (200)
@@ -55,25 +65,28 @@ class ClCallWS implements ICallWS
                 if($http_code !== intval(200)){
                     $bReturn = false;
                     $this->sMsg = "Ressource introuvable : " . $http_code;
-                    return $bReturn;
-                } else
-                {
-                    return $bReturn;
                 }
             }
+            return $bReturn;
         } catch (\Throwable $th) {
             throw $th;
         } finally {
             curl_close($curl); 
         }
     }
-    protected function AnalyzeJson($RetourWS)
+    /**
+     * AnalyzeJson function
+     *
+     * @param [STRING] $retJsonWS
+     * @return void
+     */
+    protected function AnalyzeJson($retJsonWS)
     {
         //initialisation
         $bReturn = true;
         $this->sMsg = "";
         // décodage du ficher JSON
-        $this->arData = json_decode($RetourWS, true);
+        $this->arData = json_decode($retJsonWS, true);
         //Vérif si le code client cherché a été trouvé
         $sucessRowCount = $this->arData['response']['info']['success_rows_count'];
         //fichier trouvé
@@ -91,6 +104,12 @@ class ClCallWS implements ICallWS
             return $bReturn;
         } 
     }
+    /**
+     * execute function
+     *
+     * @param [STRING] $sJsonExecute
+     * @return [BOOLEAN] $bRet
+     */
     public function execute($sJsonExecute)
     {
         // initialisation
@@ -108,10 +127,20 @@ class ClCallWS implements ICallWS
         } 
         return $bRet;
     }
+    /**
+     * getJson function
+     *
+     * @return [ARRAY] $this->arData
+     */
     public function getJson()
     {
         return $this->arData['response']['data'][0];
     }
+    /**
+     * getError function
+     *
+     * @return [STRING] $this->sMsg
+     */
     public function getError()
     {
         return $this->sMsg;

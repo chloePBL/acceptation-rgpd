@@ -1,4 +1,6 @@
 <?php
+require 'class/autoloader.php';
+Autoloader::register();
 // UTILITIES
 require_once("../utilities/class.format-date.php");
 require_once("../utilities/ut.date.php");
@@ -8,14 +10,9 @@ require_once("../utilities/ut.logFile.php");
 $errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
 $infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
 // Inclusion des interfaces
-include("interfaces/Int.callWS.php");
-include("interfaces/Int.customerToJson.php");
-
-// Inclusion des class
-include("class/class.customer.php");
-include("class/class.customerToJson.php");
-include("class/class.callWS.php");
-include("class/class.traduction.php");
+require_once("interfaces/CallWS.php");
+require_once("interfaces/CustomerToJson.php");
+// View
 include("view/view.header.php");
 // Bouton de redirection sur le site BL
 function btnRedir($lang){
@@ -62,22 +59,22 @@ function btnRedir($lang){
             break;
     }
 }
+// Affichage contenu en fct de la lang
 if(isset($_POST['lang'])){
     define("LANG", $_POST['lang']);
-    $oTrad = new traduction($_POST['lang']);
+    $oTrad = new Traduction($_POST['lang']);
 }else{
     define("LANG", "EN");
-    $oTrad = new traduction("EN");
+    $oTrad = new Traduction("EN");
 }
 // Définition du fuseau horaire souhaité
 date_default_timezone_set("Europe/Paris");
 //Instanciation de la Class Customer avec l'objet customer
-$oCustomer = new ClCustomer();
+$oCustomer = new Customer();
 if (isset($_POST['code_customer'])) {
     $infolog->addToLog(1, "[RECUP-DONNEES]-code client récupéré");
     $oCustomer->intCode_customer = $_POST['code_customer'];
     $oCustomer->sDateAccepted = date('Y-m-d H:i:s', time());
-    var_dump($oCustomer->intCode_customer);
     if (!isset($_POST['opt_in_none'])) {
         //Verif si l'Opt-in Téléphone est coché
         if (isset($_POST['phone'])) {
@@ -123,7 +120,7 @@ if (isset($_POST['code_customer'])) {
 }
 
 // Instanciation de la class TranslationToJson avec l'objet oTranslationToJson qui prend en paramètre l'objet oCustomer
-$oTranslationToJson = new ClCustomerToJson($oCustomer);
+$oTranslationToJson = new CustomerToJson($oCustomer);
 //Vérif si le fichier json a bien été implémenter avec les nouvelles infos de l'objet Customer sinon on affiche le message d'erreur
 if ($oTranslationToJson->execute() == true) {
     $infolog->addToLog(1, "[TRANSLATE-JSON]-OK");
@@ -135,7 +132,7 @@ if ($oTranslationToJson->execute() == true) {
     $method = 'POST';
     $sValue = $oTranslationToJson->getJson();
     // Appel au web service 
-    $oCallWS = new ClCallWS($url, $token, $method);
+    $oCallWS = new CallWS($url, $token, $method);
     $bRetour = $oCallWS->execute($sValue);
     //Vérif si l'appel du WS SetCustomer c'est bien passé sinon affichage du message d'erreur
     if ($bRetour == true) {

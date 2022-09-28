@@ -1,21 +1,29 @@
 <?php
 /* 
-* Class ClCustomerToJson
+* Class CustomerToJson
 * permet de convertir un objet Customer en fichier JSON
 */
-class ClCustomerToJson implements ICustomerToJson
+class CustomerToJson implements ICustomerToJson
 {
     // Déclaration des propriétés de la class
     private $oCust; // Objet Customer
     private $sJson; // fichier JSON
     private $sMsg; // message erreur
     
-    // Déclaration du constructeur
+    /**
+     * __construct function
+     *
+     * @param [OBJECT] $oCust
+     */
     public function __construct($oCust)
     {
         $this->oCust = $oCust;
     }
-    // Méthode qui permet d'implémenter un ficher JSON avec les infos de l'objet Customer
+    /**
+     * implementJson function
+     *
+     * Méthode qui permet d'implémenter un ficher JSON avec les infos de l'objet Customer
+     */
     private function implementJson()
     {
         // Init propriétés
@@ -45,17 +53,29 @@ class ClCustomerToJson implements ICustomerToJson
         }
         return $bReturn;
     }
-    // Retourne un fichier JSON
+    /**
+     * getJson function
+     *
+     * @return [STRING] $this->sJson
+     */
     public function getJson()
     {
         return $this->sJson;
     }
-    // Retourne un messsage d'erreur
+    /**
+     * getError function
+     *
+     * @return [STRING] $this->sMsg
+     */
     public function getError()
     {
         return $this->sMsg;
     }
-    // Execute la méthode d'implémentation du fichier JSON
+    /**
+     * execute function
+     *
+     * @return [BOOLEAN] $bRet
+     */
     public function execute()
     {
         $bRet = true;

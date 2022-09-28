@@ -1,4 +1,6 @@
 <?php
+require 'class/autoloader.php';
+Autoloader::register();
 // UTILITIES
 require_once("../utilities/class.format-date.php");
 require_once("../utilities/ut.date.php");
@@ -8,22 +10,17 @@ require_once("../utilities/ut.logFile.php");
 $errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
 $infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
 // Inclusion des interfaces
-include("interfaces/Int.callWS.php");
-include("interfaces/Int.customerFromJson.php");
+include("interfaces/CallWS.php");
+include("interfaces/CustomerFromJson.php");
 
-// Inclusion des class
-include("class/class.callWS.php");
-include("class/class.customerFromJson.php");
-include("class/class.customer.php");
-include("class/class.traduction.php");
 include("view/view.header.php");
-
+// Affichage contenu en fonction de la lang passé en paramètre dans l'url
 if(isset($_GET['lang'])){
     define("LANG", $_GET['lang']);
-    $oTrad = new traduction($_GET['lang']);
+    $oTrad = new Traduction($_GET['lang']);
 }else{
     define("LANG", "EN");
-    $oTrad = new traduction("EN");
+    $oTrad = new Traduction("EN");
 }
 function btnRedir($lang){
     switch($lang){
@@ -124,15 +121,15 @@ if (!empty(KEY1) & !empty(KEY2)){
       ]
       }';
     // Appel du web service qui prend en paramètre l'url, le token et le client recherché
-    $oCallWS = new ClCallWS($url, $token, $method);
+    $oCallWS = new CallWS($url, $token, $method);
     $bRetour = $oCallWS->execute($sValue);
     // le retour est OK ... on continue
     if ($bRetour == true) {
         $infolog->addToLog(1, "[APPEL-WS-GET]-OK");
         //Instanciation de la Class Customer
-        $oCustomer = new ClCustomer();
+        $oCustomer = new Customer();
         //Implémentation des infos récupéré dans le richier json dans l'obj oCustomer
-        $oTranslationJson = new ClCustomerFromJson($oCallWS->getJson(), $oCustomer);
+        $oTranslationJson = new CustomerFromJson($oCallWS->getJson(), $oCustomer);
         // Vérif si le décodage du fichier Json c'est bien passé sinon affichage du message d'erreur
         if($oTranslationJson->execute() == true){
             $infolog->addToLog(1, "[TRANSLATION-JSON]-OK");
