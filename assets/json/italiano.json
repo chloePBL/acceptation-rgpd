@@ -1,22 +1,23 @@
 {
     "home": {
-        "1": "Gestite le vostre preferenze di comunicazione con Bleu Libellule",
-        "2": "Non perdetevi altre notizie su Bleu Libellule! Ricevere ogni mese anteprime di nuovi prodotti, offerte eccezionali e personalizzate, offerte esclusive di fidelizzazione del Team Lib, selezioni di tendenze personalizzate e consigli di bellezza.",
-        "3": "Convalidare o modificare le preferenze di comunicazione comunicate ai nostri team. <br>Desiderate ricevere queste comunicazioni:",
+        "1": "Gestite le vostre preferenze di comunicazione Bleu Libellule",
+        "2": "Vuoi restare aggiornato sulle news Bleu Libellule? Ricevi ogni mese anteprime di nuovi prodotti, offerte eccezionali e personalizzate, offerte esclusive di fidelizzazione del Team Lib, selezioni di tendenze personalizzate e consigli di bellezza.",
+        "3": "Conferma o modifica le preferenze di comunicazione trasmesse ai nostri team.<br> Desideri ricevere queste comunicazioni :",
         "4": "Per sms",
         "5": "Per e-mail",
         "6": "Per posta",
         "7": "Non desidero ricevere le comunicazioni di Bleu Libellule",
-        "8": "CONVALIDARE LE MIE PREFERENZE"
+        "8": "CONFERMO LE MIE PREFERENZE"
     },
     "traitment" : {
-        "50": "Grazie, abbiamo tenuto conto delle vostre preferenze di comunicazione.",
-        "51": "Se desiderate modificare le vostre preferenze di comunicazione, accedete all'area IL MIO ACCOUNT sull'e-shop o sull'app.",
+        "50": "La ringraziamo, abbiamo tenuto conto delle sue preferenze di comunicazione.",
+        "51": "Se desideri modificare le tue preferenze di comunicazione, accedi all'area IL MIO ACCOUNT sull'e-shop.",
         "52": "A presto!"
     },
     "error": {
-        "100": "Vi preghiamo di fare una scelta.",
-        "101": "Siamo spiacenti, ma si è verificato un errore. Non è stato possibile completare la modifica.",
-        "102": "Nessun conto."
+        "100": "Seleziona una scelta.",
+        "101": "Ci scusiamo, si è verificato un errore.",
+        "102": "Ci scusiamo, si è verificato un errore. Non è stato possibile completare la modifica.",
+        "103": "Il conto non esiste."
     }
 }
