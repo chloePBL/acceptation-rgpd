@@ -10,8 +10,8 @@ require_once("../utilities/ut.logFile.php");
 $errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
 $infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
 // Inclusion des interfaces
-/* include("interfaces/CallWS.php");
-include("interfaces/CustomerFromJson.php"); */
+include("interfaces/CallWS.php");
+include("interfaces/CustomerFromJson.php");
 
 include("view/view.header.php");
 // Affichage contenu en fonction de la lang passé en paramètre dans l'url
@@ -92,7 +92,7 @@ else {
     define('KEY2', '');
     $errorlog->addToLog(2, "[KEY2]-Pas de clé transmise.");
 }
-echo '<form action="acceptation-rgpd.php" method="get" class="formLang">'
+echo '<form method="get" class="formLang">'
     . '<input type="hidden" name="code" value="' . KEY1 . '">'
     . '<input type="hidden" name="email" value="' . KEY2 . '">'
     . '<button type="submit" name="lang" value="FR" class="btnLang"><img src="./assets/img/la-france.png" class="imgLang" alt="Langue French"></button>'
@@ -106,7 +106,7 @@ if (!empty(KEY1) & !empty(KEY2)){
     //$url = 'https://bleulibellule.clic-till.com/wsRest/1_5/wsServerCustomer/GetCustomer';
     //$token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
     $url = 'https://testbl.retailandco.org/wsRest/1_5/wsServerCustomer/GetCustomer';
-    $token = 'Token: 645443ebCsm2lomJqWlmlqZ2aU';
+    $token = 'Token: 688347d7F5l5KWmJmXlJibbGVj';
     $method = 'POST';
     $sValue = '{  
         "Customers":[  
