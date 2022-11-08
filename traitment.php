@@ -128,7 +128,7 @@ if ($oTranslationToJson->execute() == true) {
     // $url = 'https://bleulibellule.clic-till.com/wsRest/1_4/wsServerCustomer/SetCustomer';
     // $token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
     $url = 'https://testbl.retailandco.org/wsRest/1_5/wsServerCustomer/SetCustomer';
-    $token = 'Token: 645443ebCsm2lomJqWlmlqZ2aU';
+    $token = 'Token: 688347d7F5l5KWmJmXlJibbGVj';
     $method = 'POST';
     $sValue = $oTranslationToJson->getJson();
     // Appel au web service 
