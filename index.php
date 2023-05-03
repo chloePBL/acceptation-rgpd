@@ -1,17 +1,19 @@
 <?php
-require 'class/Autoloader.php';
-Autoloader::register();
+// constantes d'accès
+require_once("./class/config.php");
 // UTILITIES
-require_once("../utilities/class.format-date.php");
-require_once("../utilities/ut.date.php");
+require("../utilities/autoloader_ut.php");
+require('class/Autoloader.php');
+// Autoloading des class/interfaces
+Autoloader_ut::register();
+Autoloader::register();
+
 // Log
-require_once "../utilities/interfaces/int.logger.php";
-require_once("../utilities/ut.logFile.php");
-$errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
-$infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
+$errorlog = new Log_file(null, "./logs/2", "RGPD-GET", new Date("Europe/Paris"));
+$infolog = new Log_file(null, "./logs/1", "RGPD-GET", new Date("Europe/Paris"));
 // Inclusion des interfaces
-include("interfaces/CallWS.php");
-include("interfaces/CustomerFromJson.php");
+//include("interfaces/CallWS.php");
+//include("interfaces/CustomerFromJson.php");
 
 include("view/view.header.php");
 // Affichage contenu en fonction de la lang passé en paramètre dans l'url
@@ -102,12 +104,7 @@ echo '<form method="get" class="formLang">'
 //Vérification si les constantes ne sont pas vides avec la fonction empty
 if (!empty(KEY1) & !empty(KEY2)){
     $infolog->addToLog(1, "[APPEL-WS-GET]-OK");
-    //Déclaration des variables pour l'appel au WS
-    //$url = 'https://bleulibellule.clic-till.com/wsRest/1_5/wsServerCustomer/GetCustomer';
-    //$token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
-    $url = 'https://testbl.retailandco.org/wsRest/1_5/wsServerCustomer/GetCustomer';
-    $token = 'Token: 688347d7F5l5KWmJmXlJibbGVj';
-    $method = 'POST';
+    
     $sValue = '{  
         "Customers":[  
           {  
@@ -121,45 +118,60 @@ if (!empty(KEY1) & !empty(KEY2)){
       ]
       }';
     // Appel du web service qui prend en paramètre l'url, le token et le client recherché
-    $oCallWS = new CallWS($url, $token, $method);
+    $oCallWS = new CallWS(URL_GET_CUSTOMER, TOKEN, METHOD);
     $bRetour = $oCallWS->execute($sValue);
     // le retour est OK ... on continue
     if ($bRetour == true) {
         $infolog->addToLog(1, "[APPEL-WS-GET]-OK");
-        //Instanciation de la Class Customer
-        $oCustomer = new Customer();
-        //Implémentation des infos récupéré dans le richier json dans l'obj oCustomer
-        $oTranslationJson = new CustomerFromJson($oCallWS->getJson(), $oCustomer);
-        // Vérif si le décodage du fichier Json c'est bien passé sinon affichage du message d'erreur
-        if($oTranslationJson->execute() == true){
-            $infolog->addToLog(1, "[TRANSLATION-JSON]-OK");
-            //Vérification de l'email et du code client envoyé par splio est le même que celui dans le fichier json sinon exit()
-            if (KEY2 === $oCustomer->sEmail && KEY1 === $oCustomer->intCode_customer){
-                /* var_dump(md5($oCustomer->sEmail));
-                var_dump(KEY2);
-                var_dump(md5($oCustomer->sEmail) == KEY2); */
-            //if ((md5($oCustomer->sEmail) ==  KEY2)  && KEY1 === $oCustomer->intCode_customer){
-            //$passwordSha = hash("sha256", $oCustomer->sEmail);
-            //echo("<br>47582711847d5e3539f1a18d49ba789f946d1a79a37fe6196159b7dd25a396bc");
-            //var_dump($passwordSha);
-            //var_dump(KEY1);
-            //var_dump(KEY2);
-            //var_dump($oCustomer->sEmail);
-            //if ($passwordSha === KEY2 && KEY1 === $oCustomer->intCode_customer){
-                // Ajout log
-                $infolog->addToLog(1, "[CORRESPONDANCE-DONNEES]-client trouvé.");
-                //Affichage du formulaire pré-rempli en fonction des choix du client
-                include("view/view.form.php");
-            } else {
-                $errorlog->addToLog(2, "[CORRESPONDANCE-DONNEES]-client introuvable.");
-                echo "<p>" . $oTrad->trad("error", "103") . "</p>";
+
+        // Analyse du json
+        $oJson = new AnalyzeJson($oCallWS->getJson());
+        $bRetAnalyze = $oJson->traitmentJson();
+        if($bRetAnalyze == true){
+            $infolog->addToLog(1, "[ANALYZE-JSON]- OK");
+            /* var_dump($oJson->getData());
+            exit; */
+            //Instanciation de la Class Customer
+            $oCustomer = new Customer();
+            //Implémentation des infos récupéré dans le richier json dans l'obj oCustomer
+            $oTranslationJson = new CustomerFromJson($oJson->getData(), $oCustomer);
+            // Vérif si le décodage du fichier Json c'est bien passé sinon affichage du message d'erreur
+            if($oTranslationJson->execute() == true){
+                $infolog->addToLog(1, "[TRANSLATION-JSON]- OK");
+                //Vérification de l'email et du code client envoyé par splio est le même que celui dans le fichier json sinon exit()
+                if (KEY2 === $oCustomer->sEmail && KEY1 === $oCustomer->intCode_customer){
+                    /* var_dump(md5($oCustomer->sEmail));
+                    var_dump(KEY2);
+                    var_dump(md5($oCustomer->sEmail) == KEY2); */
+                //if ((md5($oCustomer->sEmail) ==  KEY2)  && KEY1 === $oCustomer->intCode_customer){
+                //$passwordSha = hash("sha256", $oCustomer->sEmail);
+                //echo("<br>47582711847d5e3539f1a18d49ba789f946d1a79a37fe6196159b7dd25a396bc");
+                //var_dump($passwordSha);
+                //var_dump(KEY1);
+                //var_dump(KEY2);
+                //var_dump($oCustomer->sEmail);
+                //if ($passwordSha === KEY2 && KEY1 === $oCustomer->intCode_customer){
+                    // Ajout log
+                    $infolog->addToLog(1, "[CORRESPONDANCE-DONNEES]-client trouvé.");
+                    //Affichage du formulaire pré-rempli en fonction des choix du client
+                    include("view/view.form.php");
+                } else {
+                    $errorlog->addToLog(2, "[CORRESPONDANCE-DONNEES]-client introuvable.");
+                    echo "<p>" . $oTrad->trad("error", "103") . "</p>";
+                    btnRedir(LANG);
+                }
+            }else {
+                $errorlog->addToLog(2, "[TRANSLATION-JSON]-" . $oTranslationJson->getError());
+                echo "<p>" . $oTrad->trad("error", "101") . "</p>";
                 btnRedir(LANG);
             }
-        }else {
-            $errorlog->addToLog(2, "[TRANSLATION-JSON]-" . $oTranslationJson->getError());
+
+        }else{
+            $errorlog->addToLog(2, "[ANALYZE-JSON]-" . $oJson->getError());
             echo "<p>" . $oTrad->trad("error", "101") . "</p>";
             btnRedir(LANG);
         }
+        
     } else {
         $errorlog->addToLog(2, "[APPEL-WS-GET]-" . $oCallWS->getError());
         echo "<p>" . $oTrad->trad("error", "101") . "</p>";

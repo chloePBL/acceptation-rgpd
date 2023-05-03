@@ -1,17 +1,16 @@
 <?php
-require 'class/Autoloader.php';
-Autoloader::register();
+// constantes d'accès
+require_once("./class/config.php");
 // UTILITIES
-require_once("../utilities/class.format-date.php");
-require_once("../utilities/ut.date.php");
-// Log
-require_once "../utilities/interfaces/int.logger.php";
-require_once("../utilities/ut.logFile.php");
-$errorlog = new ClLogFile(null, "./logs/2", "RGPD-GET", new ClDate("Europe/Paris"));
-$infolog = new ClLogFile(null, "./logs/1", "RGPD-GET", new ClDate("Europe/Paris"));
-// Inclusion des interfaces
-require_once("interfaces/CallWS.php");
-require_once("interfaces/CustomerToJson.php");
+require("../utilities/autoloader_ut.php");
+require('class/Autoloader.php');
+// Autoloading des class/interfaces
+Autoloader_ut::register();
+Autoloader::register();
+
+$errorlog = new Log_file(null, "./logs/2", "RGPD-GET", new Date("Europe/Paris"));
+$infolog = new Log_file(null, "./logs/1", "RGPD-GET", new Date("Europe/Paris"));
+
 // View
 include("view/view.header.php");
 // Bouton de redirection sur le site BL
@@ -125,14 +124,9 @@ $oTranslationToJson = new CustomerToJson($oCustomer);
 if ($oTranslationToJson->execute() == true) {
     $infolog->addToLog(1, "[TRANSLATE-JSON]-OK");
     //Déclaration des variables pour l'appel au WS
-    // $url = 'https://bleulibellule.clic-till.com/wsRest/1_4/wsServerCustomer/SetCustomer';
-    // $token = 'Token: 372397pHyrmGhhY2Zkm5hmlmJr';
-    $url = 'https://testbl.retailandco.org/wsRest/1_5/wsServerCustomer/SetCustomer';
-    $token = 'Token: 688347d7F5l5KWmJmXlJibbGVj';
-    $method = 'POST';
     $sValue = $oTranslationToJson->getJson();
     // Appel au web service 
-    $oCallWS = new CallWS($url, $token, $method);
+    $oCallWS = new CallWS(URL_SET_CUSTOMER, TOKEN, METHOD);
     $bRetour = $oCallWS->execute($sValue);
     //Vérif si l'appel du WS SetCustomer c'est bien passé sinon affichage du message d'erreur
     if ($bRetour == true) {
