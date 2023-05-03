@@ -3,7 +3,7 @@
 * Class CustomerToJson
 * permet de convertir un objet Customer en fichier JSON
 */
-class CustomerToJson implements ICustomerToJson
+class CustomerToJson implements CustomerToJson_I
 {
     // Déclaration des propriétés de la class
     private $oCust; // Objet Customer

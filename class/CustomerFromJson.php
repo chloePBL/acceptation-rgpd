@@ -3,7 +3,7 @@
  * Class CustomerFromJson
  * permet de décoder le fichier JSON et d'implémenter les infos recueillis dans l'objet Customer
  */
-class CustomerFromJson implements ICustomerFromJson
+class CustomerFromJson implements CustomerFromJson_I
 {
     // Déclaration des propriétés
     private $sMsg; // STRING - message d'erreur
@@ -33,6 +33,8 @@ class CustomerFromJson implements ICustomerFromJson
         $this->sMsg = "";
         // Gestion des erreurs
         try {
+            /* var_dump($this->sDataJson);
+            exit; */
             // Implémentation des attributs de l'objet $customer avec les infos récupérés dans le JSON
             $this->oCustomer->intCode_customer = $this->sDataJson['code_customer'];
             $this->oCustomer->isOptIn_phone = $this->sDataJson['opt_in_phone'];
