@@ -19,8 +19,18 @@ class Autoloader {
      * @return void
      */
     static function autoloadClass($class){
-        if(file_exists(__DIR__ . '/' . $class . '.php')){
+        /* if(file_exists(__DIR__ . '/' . $class . '.php')){
             require __DIR__ . '/' . $class . '.php'; 
+        } */
+        $paths = array(
+            join(DIRECTORY_SEPARATOR, [__DIR__]),
+            join(DIRECTORY_SEPARATOR, [__DIR__, "interfaces"])
+        );
+        foreach($paths as $path){
+            $file = join(DIRECTORY_SEPARATOR, [$path, $class.".php"]);
+            if(file_exists($file)){
+                return require_once $file;
+            }
         }
     }
 }
