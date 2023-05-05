@@ -8,13 +8,11 @@ require('class/Autoloader.php');
 Autoloader_ut::register();
 Autoloader::register();
 
-// Log
+// Logs
 $errorlog = new Log_file(null, "./logs/2", "RGPD-GET", new Date("Europe/Paris"));
 $infolog = new Log_file(null, "./logs/1", "RGPD-GET", new Date("Europe/Paris"));
-// Inclusion des interfaces
-//include("interfaces/CallWS.php");
-//include("interfaces/CustomerFromJson.php");
 
+// VIEW
 include("view/view.header.php");
 // Affichage contenu en fonction de la lang passé en paramètre dans l'url
 if(isset($_GET['lang'])){
