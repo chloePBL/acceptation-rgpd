@@ -59,12 +59,12 @@ function btnRedir($lang){
     }
 }
 // Affichage contenu en fct de la lang
-if(isset($_POST['lang'])){
+if(isset($_POST['lang']) && strlen($_POST['lang'])){
     define("LANG", $_POST['lang']);
-    $oTrad = new Traduction($_POST['lang']);
+    $oTrad = new Traduction(LANG);
 }else{
     define("LANG", "EN");
-    $oTrad = new Traduction("EN");
+    $oTrad = new Traduction(LANG);
 }
 // Définition du fuseau horaire souhaité
 date_default_timezone_set("Europe/Paris");

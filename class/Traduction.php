@@ -36,7 +36,17 @@ class Traduction
      */
     public function trad($subject, $id)
     {
-        switch($this->lang){
+        $lang = $this->lang;
+        self::readJson("./assets/json/lang.json");
+        
+        if(isset($this->obj->lang->$lang)){
+            self::readJson($this->obj->lang->$lang);
+            return $this->obj->$subject->$id;
+        }else{
+            self::readJson($this->obj->lang->EN);
+            return $this->obj->$subject->$id;
+        }
+        /* switch($this->lang){
             case "EN":
                 self::readJson("./assets/json/english.json");
                 return $this->obj->$subject->$id;
@@ -49,6 +59,6 @@ class Traduction
                 return $this->obj->$subject->$id;
             default:
                 self::readJson("./assets/json/english.json");
-        }
+        } */
     }
 }

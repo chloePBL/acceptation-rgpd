@@ -1,0 +1,7 @@
+{
+    "lang" : {
+        "EN" : "./assets/json/english.json",
+        "FR" : "./assets/json/french.json",
+        "IT" : "./assets/json/italiano.json"
+    }
+}

@@ -15,12 +15,12 @@ $infolog = new Log_file(null, "./logs/1", "RGPD-GET", new Date("Europe/Paris"));
 // VIEW
 include("view/view.header.php");
 // Affichage contenu en fonction de la lang passé en paramètre dans l'url
-if(isset($_GET['lang'])){
+if(isset($_GET['lang']) && strlen($_GET['lang'])){
     define("LANG", $_GET['lang']);
-    $oTrad = new Traduction($_GET['lang']);
+    $oTrad = new Traduction(LANG);
 }else{
     define("LANG", "EN");
-    $oTrad = new Traduction("EN");
+    $oTrad = new Traduction(LANG);
 }
 function btnRedir($lang){
     switch($lang){
@@ -127,8 +127,6 @@ if (!empty(KEY1) & !empty(KEY2)){
         $bRetAnalyze = $oJson->traitmentJson();
         if($bRetAnalyze == true){
             $infolog->addToLog(1, "[ANALYZE-JSON]- OK");
-            /* var_dump($oJson->getData());
-            exit; */
             //Instanciation de la Class Customer
             $oCustomer = new Customer();
             //Implémentation des infos récupéré dans le richier json dans l'obj oCustomer
@@ -138,17 +136,6 @@ if (!empty(KEY1) & !empty(KEY2)){
                 $infolog->addToLog(1, "[TRANSLATION-JSON]- OK");
                 //Vérification de l'email et du code client envoyé par splio est le même que celui dans le fichier json sinon exit()
                 if (KEY2 === $oCustomer->sEmail && KEY1 === $oCustomer->intCode_customer){
-                    /* var_dump(md5($oCustomer->sEmail));
-                    var_dump(KEY2);
-                    var_dump(md5($oCustomer->sEmail) == KEY2); */
-                //if ((md5($oCustomer->sEmail) ==  KEY2)  && KEY1 === $oCustomer->intCode_customer){
-                //$passwordSha = hash("sha256", $oCustomer->sEmail);
-                //echo("<br>47582711847d5e3539f1a18d49ba789f946d1a79a37fe6196159b7dd25a396bc");
-                //var_dump($passwordSha);
-                //var_dump(KEY1);
-                //var_dump(KEY2);
-                //var_dump($oCustomer->sEmail);
-                //if ($passwordSha === KEY2 && KEY1 === $oCustomer->intCode_customer){
                     // Ajout log
                     $infolog->addToLog(1, "[CORRESPONDANCE-DONNEES]-client trouvé.");
                     //Affichage du formulaire pré-rempli en fonction des choix du client
